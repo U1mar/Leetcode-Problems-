@@ -4,42 +4,11 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        length = len(s)
+        val = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
         num = 0
-        x= 0
-        while x < length:
-            if s[x:x+2] == "IV":
-                x+=1
-                num += 4
-            elif  s[x:x+2] == "IX" :
-                x+=1
-                num +=9
-            elif s[x:x+2] == "XL":
-                x+=1 
-                num += 40
-            elif s[x:x+2] == "XC":
-                x +=1 
-                num += 90
-            elif s[x:x+2] =="CD":
-                x +=1 
-                num += 400
-            elif s[x:x+2] =="CM":   
-                x+=1 
-                num +=900
+        for i in range(len(s)):
+            if i + 1 < len(s) and val[s[i]] < val[s[i + 1]]:
+                num -= val[s[i]]
             else:
-                if s[x] == "I":
-                    num += 1
-                elif s[x] == "V":
-                    num +=5 
-                elif s [x] == "X":
-                    num += 10 
-                elif s[x] == "L" :
-                    num +=50
-                elif s[x]  == "C":
-                    num +=100 
-                elif s[x] == "D" :
-                    num += 500 
-                elif s[x] == "M" :
-                    num +=1000
-            x+=1
-        return num 
+                num += val[s[i]]
+        return num
